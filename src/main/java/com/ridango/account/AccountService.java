@@ -2,6 +2,7 @@ package com.ridango.account;
 
 import java.util.Optional;
 
+import com.ridango.payment.IncomingPayment;
 import com.ridango.payment.Payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +14,18 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account handlePayment(Payment payment) {
-        Optional<Account> senderAccount = accountRepository.findById(payment.getSenderAccountId());
-        Optional<Account> reciverAccount = accountRepository.findById(payment.getReciverAccountId());
+    public Account handlePayment(IncomingPayment incomingPayment) {
+        Optional<Account> senderAccount = accountRepository.findById(incomingPayment.getSenderAccountId());
+        Optional<Account> reciverAccount = accountRepository.findById(incomingPayment.getReciverAccountId());
         Account result = null;
         if(senderAccount.isPresent()){
-            result = adjustAccountBalance(senderAccount.get(), payment.getAmount());
+            result = adjustAccountBalance(senderAccount.get(), incomingPayment.getAmount());
         }else{
             //TODO Exception
         }
         
         if(reciverAccount.isPresent()){
-            result = adjustAccountBalance(reciverAccount.get(), payment.getAmount());
+            result = adjustAccountBalance(reciverAccount.get(), incomingPayment.getAmount());
         }else{
             //TODO Exception
         }
@@ -32,9 +33,9 @@ public class AccountService {
         return result;
 	}
 
-    private Account adjustAccountBalance(Account account, String amount) {
+    private Account adjustAccountBalance(Account account, int amount) {
         Account result = null;
-        if(Integer.parseInt(account.getBalance()) > Integer.parseInt(amount)){
+        if (account.getBalance() > amount) {
             result = accountRepository.save(account);
         }else{
             // TODO Exception

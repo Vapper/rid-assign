@@ -14,9 +14,9 @@ public class PaymentController {
 
     
     @PostMapping("/payment")
-    public String paymentSubmit(@RequestBody Payment payment) {
+    public String paymentSubmit(@RequestBody IncomingPayment incomingPayment) {
         try {
-            paymentService.savePayment(payment);
+            paymentService.savePayment(incomingPayment);
         } catch (NegativePaymentAmountException e) {
             return "Payment amount must be above 0";
         }

@@ -2,17 +2,25 @@ package com.ridango.payment;
 
 public class Payment {
     
+    private long id;
     private long senderAccountId;
     private long reciverAccountId;
-    private String amount;
 
     public Payment() {
     }
 
-    public Payment(long senderAccountId, long reciverAccountId, String amount) {
+    public Payment(long id, long senderAccountId, long reciverAccountId) {
+        this.id = id;
         this.senderAccountId = senderAccountId;
         this.reciverAccountId = reciverAccountId;
-        this.amount = amount;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
     
     public long getSenderAccountId() {
@@ -30,17 +38,5 @@ public class Payment {
     public void setReciverAccountId(long reciverAccountId) {
         this.reciverAccountId = reciverAccountId;
     }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    
-
-
 
 }

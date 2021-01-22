@@ -18,12 +18,13 @@ public class PaymentService {
     @Autowired
     private AccountService accountService;
 
-    public Payment savePayment(Payment payment) throws NegativePaymentAmountException {
-        if (Integer.parseInt(payment.getAmount()) < 0) {
+    public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException {
+        if (incomingPayment.getAmount() > 0) {
             throw new NegativePaymentAmountException();
         }
-        Payment result = paymentRepository.save(payment);
+        //Payment result = paymentRepository.save(payment);
         //Account accountResult = accountService.handlePayment(payment);
+        Payment result = null;
         return result;
     }
 
