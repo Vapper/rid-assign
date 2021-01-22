@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EntityScan({"com.ridango.account","com.ridango.payment"})
 @SpringBootApplication
+@EnableJpaRepositories
 public class PaymentApplication {
 
 	public static void main(String[] args) {

@@ -1,7 +1,13 @@
 package com.ridango.payment;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+
+@Entity
 public class Payment {
     
+    @Id
     private long id;
     private long senderAccountId;
     private long reciverAccountId;

@@ -33,9 +33,9 @@ public class AccountService {
         return result;
 	}
 
-    private Account adjustAccountBalance(Account account, int amount) {
+    private Account adjustAccountBalance(Account account, String amount) {
         Account result = null;
-        if (account.getBalance() > amount) {
+        if (account.getBalance() > Integer.parseInt(amount)) {
             result = accountRepository.save(account);
         }else{
             // TODO Exception

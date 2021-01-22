@@ -19,7 +19,7 @@ public class PaymentService {
     private AccountService accountService;
 
     public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException {
-        if (incomingPayment.getAmount() > 0) {
+        if (Integer.parseInt(incomingPayment.getAmount()) > 0) {
             throw new NegativePaymentAmountException();
         }
         //Payment result = paymentRepository.save(payment);
