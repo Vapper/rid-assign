@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PaymentApplication<assignment>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ridango.payment.PaymentApplication",
+            "projectName": "assignment",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-PaymentApplication<assignment>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ridango.PaymentApplication",
+            "projectName": "assignment",
+            "args": ""
+        }
+    ]
+}
