@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 
 public class IncomingPayment {
 
-    Logger logger = LoggerFactory.getLogger(IncomingPayment.class);
-
     private Long senderAccountId;
     private Long receiverAccountId;
     private String amount;
@@ -45,7 +43,6 @@ public class IncomingPayment {
     }
 
     public int getAmountAsInt() throws NumberFormatException{
-        logger.info(amount.subSequence(amount.indexOf(".")+1,amount.length()).toString());
         if(!amount.contains(".") ||  (amount.subSequence(amount.indexOf(".")+1,amount.length()).length() != 2)){
             throw new NumberFormatException();
         }

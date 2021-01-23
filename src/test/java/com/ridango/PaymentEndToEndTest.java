@@ -116,7 +116,7 @@ public class PaymentEndToEndTest {
     }
 
 
-    
+    //Helper
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
