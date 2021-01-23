@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ridango.account.Account;
 import com.ridango.account.AccountService;
+import com.ridango.account.NegativeBalanceException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,9 @@ public class PaymentService {
     @Autowired
     private AccountService accountService;
 
-    public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException, MissingAccountException {
-        
-        if (incomingPayment.getAmountAsFloat() < 0.0) {
+    public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException, MissingAccountException, NegativeBalanceException {
+
+        if (incomingPayment.getAmountAsInt() < 0) {
             throw new NegativePaymentAmountException();
         }
 

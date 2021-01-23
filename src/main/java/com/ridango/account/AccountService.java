@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ridango.payment.IncomingPayment;
+import com.ridango.payment.MissingAccountException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,30 +23,32 @@ public class AccountService {
         Optional<Account> senderAccount = accountRepository.findById(incomingPayment.getSenderAccountId());
         Optional<Account> reciverAccount = accountRepository.findById(incomingPayment.getReceiverAccountId());
         Account result = null;
-        logger.info("Before is present");
         if(senderAccount.isPresent()){
-            result = adjustAccountBalance(senderAccount.get(), incomingPayment.getAmount());
+            if(checkBalance(senderAccount.get(), incomingPayment.getAmountAsInt())){
+                result = adjustAccountBalance(senderAccount.get(), incomingPayment.getAmountAsInt());
+            }else{
+                throw new NegativeBalanceException();
+            }
         }else{
-            logger.info("senderAccount not present");
-            //TODO Exception
+            throw new MissingAccountException();
         }
         
         if(reciverAccount.isPresent()){
-            result = adjustAccountBalance(reciverAccount.get(), incomingPayment.getAmount());
+            result = adjustAccountBalance(reciverAccount.get(), -incomingPayment.getAmountAsInt());
         }else{
-            logger.info("receiverAccount not present");
+            throw new MissingAccountException();
         }
-
         return result;
-	}
+    }
+    
+    private boolean checkBalance(Account account, int amount){
+        return account.getBalance() >= amount;
+    }
 
-    private Account adjustAccountBalance(Account account, String amount) {
-        Account result = null;
-        if (account.getBalance() > Integer.parseInt(amount)) {
-            result = accountRepository.save(account);
-        }else{
-            logger.info("ERROR IN ACCOUNT");
-        }
+    private Account adjustAccountBalance(Account account, int amount) {
+        int newBalance = account.getBalance() - amount;
+        account.setBalance(newBalance);
+        Account result = accountRepository.save(account);
         return result;
     }
 

@@ -39,8 +39,9 @@ public class IncomingPayment {
         this.amount = amount;
     }
 
-    public float getAmountAsFloat(){
-        return Float.parseFloat(amount);
+    public int getAmountAsInt(){
+        String newAmount = amount.replaceAll("\\.", "");
+        return Integer.parseInt(newAmount);
     }
 
     

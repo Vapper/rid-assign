@@ -2,6 +2,8 @@ package com.ridango.payment;
 
 import java.util.List;
 
+import com.ridango.account.NegativeBalanceException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,14 @@ public class PaymentController {
     @PostMapping("/payment")
     public String paymentSubmit(@RequestBody IncomingPayment incomingPayment) {
         try {
-            logger.info(incomingPayment.toString() + " in Payment Controller");
             paymentService.savePayment(incomingPayment);
-        } catch (NegativePaymentAmountException e) {
+        } catch (NegativePaymentAmountException e1) {
             return "Payment amount must be above 0";
-        } catch (MissingAccountException e) {
+        } catch (MissingAccountException e2) {
             return "Account is missing";
+        } catch (NegativeBalanceException e3) {
+            return "Not enough money on account";
         }
-        
         return "Success";
     }
 
