@@ -39,7 +39,10 @@ public class IncomingPayment {
         this.amount = amount;
     }
 
-    public int getAmountAsInt(){
+    public int getAmountAsInt() throws NumberFormatException{
+        if(!amount.contains(".") ||  !(amount.subSequence(amount.indexOf("."),amount.length()).length() < 2)){
+            throw new NumberFormatException();
+        }
         String newAmount = amount.replaceAll("\\.", "");
         return Integer.parseInt(newAmount);
     }

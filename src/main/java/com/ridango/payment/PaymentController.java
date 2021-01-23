@@ -28,9 +28,11 @@ public class PaymentController {
         } catch (NegativePaymentAmountException e1) {
             return "Payment amount must be above 0";
         } catch (MissingAccountException e2) {
-            return "Account is missing";
+            return "Account is missing or incorrectly formatted. Must be numeric Id";
         } catch (NegativeBalanceException e3) {
             return "Not enough money on account";
+        } catch (NumberFormatException e4) {
+            return "Wrongly formatted amount";
         }
         return "Success";
     }

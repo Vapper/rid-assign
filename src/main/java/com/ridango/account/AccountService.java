@@ -19,7 +19,7 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account handlePayment(IncomingPayment incomingPayment) {
+    public Account handlePayment(IncomingPayment incomingPayment) throws NumberFormatException{
         Optional<Account> senderAccount = accountRepository.findById(incomingPayment.getSenderAccountId());
         Optional<Account> reciverAccount = accountRepository.findById(incomingPayment.getReceiverAccountId());
         Account result = null;

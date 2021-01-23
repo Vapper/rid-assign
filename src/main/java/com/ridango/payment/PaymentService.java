@@ -21,7 +21,7 @@ public class PaymentService {
     @Autowired
     private AccountService accountService;
 
-    public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException, MissingAccountException, NegativeBalanceException {
+    public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException, MissingAccountException, NegativeBalanceException, NumberFormatException {
 
         if (incomingPayment.getAmountAsInt() < 0) {
             throw new NegativePaymentAmountException();
