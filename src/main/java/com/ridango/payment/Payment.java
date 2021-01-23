@@ -1,6 +1,7 @@
 package com.ridango.payment;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
@@ -8,17 +9,17 @@ import javax.persistence.Id;
 public class Payment {
     
     @Id
+    @GeneratedValue()
     private long id;
     private long senderAccountId;
-    private long reciverAccountId;
+    private long receiverAccountId;
 
     public Payment() {
     }
 
-    public Payment(long id, long senderAccountId, long reciverAccountId) {
-        this.id = id;
+    public Payment(long senderAccountId, long receiverAccountId) {
         this.senderAccountId = senderAccountId;
-        this.reciverAccountId = reciverAccountId;
+        this.receiverAccountId = receiverAccountId;
     }
 
     public long getId() {
@@ -28,7 +29,7 @@ public class Payment {
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public long getSenderAccountId() {
         return senderAccountId;
     }
@@ -37,12 +38,14 @@ public class Payment {
         this.senderAccountId = senderAccountId;
     }
 
-    public long getReciverAccountId() {
-        return reciverAccountId;
+    public long getReceiverAccountId() {
+        return receiverAccountId;
     }
 
-    public void setReciverAccountId(long reciverAccountId) {
-        this.reciverAccountId = reciverAccountId;
+    public void setReceiverAccountId(long receiverAccountId) {
+        this.receiverAccountId = receiverAccountId;
     }
+
+    
 
 }

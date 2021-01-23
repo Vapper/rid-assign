@@ -1,5 +1,7 @@
 package com.ridango.payment;
 
+import java.util.List;
+
 import com.ridango.account.Account;
 import com.ridango.account.AccountService;
 
@@ -18,14 +20,24 @@ public class PaymentService {
     @Autowired
     private AccountService accountService;
 
-    public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException {
-        if (Integer.parseInt(incomingPayment.getAmount()) > 0) {
+    public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException, MissingAccountException {
+        
+        if (incomingPayment.getAmountAsFloat() < 0.0) {
             throw new NegativePaymentAmountException();
         }
-        //Payment result = paymentRepository.save(payment);
-        //Account accountResult = accountService.handlePayment(payment);
-        Payment result = null;
+
+        Payment payment = new Payment(
+            incomingPayment.getSenderAccountId(), 
+            incomingPayment.getReceiverAccountId()
+        );
+        
+        Account accountResult = accountService.handlePayment(incomingPayment);
+        Payment result = paymentRepository.save(payment);
         return result;
     }
+
+	public List<Payment> getAllPayments() {
+        return (List<Payment>) paymentRepository.findAll();
+	}
 
 }

@@ -3,12 +3,12 @@ package com.ridango.payment;
 public class IncomingPayment {
 
     private Long senderAccountId;
-    private Long reciverAccountId;
+    private Long receiverAccountId;
     private String amount;
 
-    public IncomingPayment(Long senderAccountId, Long reciverAccountId, String amount) {
+    public IncomingPayment(Long senderAccountId, Long receiverAccountId, String amount) {
         this.senderAccountId = senderAccountId;
-        this.reciverAccountId = reciverAccountId;
+        this.receiverAccountId = receiverAccountId;
         this.amount = amount;
     }
 
@@ -23,12 +23,12 @@ public class IncomingPayment {
         this.senderAccountId = senderAccountId;
     }
 
-    public Long getReciverAccountId() {
-        return reciverAccountId;
+    public Long getReceiverAccountId() {
+        return receiverAccountId;
     }
 
-    public void setReciverAccountId(Long reciverAccountId) {
-        this.reciverAccountId = reciverAccountId;
+    public void setReceiverAccountId(Long receiverAccountId) {
+        this.receiverAccountId = receiverAccountId;
     }
 
     public String getAmount() {
@@ -37,6 +37,10 @@ public class IncomingPayment {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public float getAmountAsFloat(){
+        return Float.parseFloat(amount);
     }
 
     
