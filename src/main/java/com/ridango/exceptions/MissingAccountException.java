@@ -1,4 +1,4 @@
-package com.ridango.payment;
+package com.ridango.exceptions;
 
 public class MissingAccountException extends RuntimeException {
 

@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ridango.payment.IncomingPayment;
-import com.ridango.payment.MissingAccountException;
+import com.ridango.exceptions.MissingAccountException;
+import com.ridango.exceptions.NegativeBalanceException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,18 +24,13 @@ public class AccountService {
         Optional<Account> senderAccount = accountRepository.findById(incomingPayment.getSenderAccountId());
         Optional<Account> reciverAccount = accountRepository.findById(incomingPayment.getReceiverAccountId());
         Account result = null;
-        if(senderAccount.isPresent()){
+        if(senderAccount.isPresent() && reciverAccount.isPresent()){
             if(checkBalance(senderAccount.get(), incomingPayment.getAmountAsInt())){
                 result = adjustAccountBalance(senderAccount.get(), incomingPayment.getAmountAsInt());
+                result = adjustAccountBalance(reciverAccount.get(), -incomingPayment.getAmountAsInt());
             }else{
                 throw new NegativeBalanceException();
             }
-        }else{
-            throw new MissingAccountException();
-        }
-        
-        if(reciverAccount.isPresent()){
-            result = adjustAccountBalance(reciverAccount.get(), -incomingPayment.getAmountAsInt());
         }else{
             throw new MissingAccountException();
         }

@@ -1,4 +1,4 @@
-package com.ridango.account;
+package com.ridango.exceptions;
 
 public class NegativeBalanceException extends RuntimeException{
 
