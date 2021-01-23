@@ -16,9 +16,6 @@ CREATE TABLE payment(
   FOREIGN KEY (receiver_account_id) REFERENCES account(id)
 );
 
-ALTER TABLE account ADD CHECK (balance > 0);
+-- Would add this as an additional constraint
+--ALTER TABLE account ADD CHECK (balance > 0);
 
-INSERT INTO ACCOUNT (id, balance, name) VALUES 
-(0, 5000, 'karl'),
-(1, 15000, 'toomas'),
-(2, 100000, 'mart');

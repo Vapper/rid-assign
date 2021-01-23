@@ -6,8 +6,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -32,19 +30,11 @@ public class PaymentEndToEndTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // @Autowired
-    // private TestRestTemplate restTemplate;
-
-    // @LocalServerPort
-    // private int port;
-
-    // @Before
-
     @Test
     @Sql("test-data.sql")
     public void testCorrectPayment() throws Exception {
         this.mockMvc.perform(
-                MockMvcRequestBuilders.post("/payment").content(asJsonString(new IncomingPayment(0L, 1L, "10.00")))
+                MockMvcRequestBuilders.post("/payment").content(asJsonString(new IncomingPayment(0L, 1L, "10.20")))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 
         MvcResult result_accounts = this.mockMvc.perform(MockMvcRequestBuilders.get("/accounts")).andReturn();

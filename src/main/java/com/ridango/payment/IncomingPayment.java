@@ -1,6 +1,11 @@
 package com.ridango.payment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class IncomingPayment {
+
+    Logger logger = LoggerFactory.getLogger(IncomingPayment.class);
 
     private Long senderAccountId;
     private Long receiverAccountId;
@@ -40,7 +45,8 @@ public class IncomingPayment {
     }
 
     public int getAmountAsInt() throws NumberFormatException{
-        if(!amount.contains(".") ||  !(amount.subSequence(amount.indexOf("."),amount.length()).length() < 2)){
+        logger.info(amount.subSequence(amount.indexOf(".")+1,amount.length()).toString());
+        if(!amount.contains(".") ||  (amount.subSequence(amount.indexOf(".")+1,amount.length()).length() != 2)){
             throw new NumberFormatException();
         }
         String newAmount = amount.replaceAll("\\.", "");
