@@ -42,12 +42,11 @@ public class IncomingPayment {
         this.amount = amount;
     }
 
-    public int getAmountAsInt() throws NumberFormatException{
+    public int amountAsInt() throws NumberFormatException{
         if(!amount.contains(".") ||  (amount.subSequence(amount.indexOf(".")+1,amount.length()).length() != 2)){
             throw new NumberFormatException();
         }
-        String newAmount = amount.replaceAll("\\.", "");
-        return Integer.parseInt(newAmount);
+        return Integer.parseInt(amount.replaceAll("\\.", ""));
     }
 
     

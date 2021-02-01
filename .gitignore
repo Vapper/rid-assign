@@ -1,0 +1,4 @@
+.gradle/checksums/checksums.lock
+.gradle/checksums/md5-checksums.bin
+.gradle/checksums/sha1-checksums.bin
+.settings/org.eclipse.buildship.core.prefs

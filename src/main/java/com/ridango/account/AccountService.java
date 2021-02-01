@@ -25,9 +25,9 @@ public class AccountService {
         Optional<Account> reciverAccount = accountRepository.findById(incomingPayment.getReceiverAccountId());
         Account result = null;
         if(senderAccount.isPresent() && reciverAccount.isPresent()){
-            if(checkBalance(senderAccount.get(), incomingPayment.getAmountAsInt())){
-                result = adjustAccountBalance(senderAccount.get(), incomingPayment.getAmountAsInt());
-                result = adjustAccountBalance(reciverAccount.get(), -incomingPayment.getAmountAsInt());
+            if(checkBalance(senderAccount.get(), incomingPayment.amountAsInt())){
+                result = adjustAccountBalance(senderAccount.get(), incomingPayment.amountAsInt());
+                result = adjustAccountBalance(reciverAccount.get(), -incomingPayment.amountAsInt());
             }else{
                 throw new NegativeBalanceException();
             }

@@ -23,7 +23,7 @@ public class PaymentService {
 
     public Payment savePayment(IncomingPayment incomingPayment) throws NegativePaymentAmountException, MissingAccountException, NegativeBalanceException, NumberFormatException {
 
-        if (incomingPayment.getAmountAsInt() < 0) {
+        if (incomingPayment.amountAsInt() < 0) {
             throw new NegativePaymentAmountException();
         }
 

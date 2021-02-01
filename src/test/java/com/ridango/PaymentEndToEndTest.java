@@ -105,7 +105,7 @@ public class PaymentEndToEndTest {
                 .perform(MockMvcRequestBuilders.post("/payment")
                         .content(asJsonString(new IncomingPayment(0L, 1L, "10.0")))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-                .andExpect((ResultMatcher) MockMvcResultMatchers.content().string("Account is missing or incorrectly formatted. Must be numeric Id"));
+                .andExpect((ResultMatcher) MockMvcResultMatchers.content().string("Wrongly formatted amount"));
 
                 MvcResult result_payments = this.mockMvc.perform(MockMvcRequestBuilders.get("/payments")).andReturn();
                 MvcResult result_accounts = this.mockMvc.perform(MockMvcRequestBuilders.get("/accounts")).andReturn();
